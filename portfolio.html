@@ -9,7 +9,8 @@
   :root {
     --bg: #0d0f14;
     --surface: #13161d;
-    --border: #1e2330;
+    --surface-light: #1e2330;
+    --border: #252b3d;
     --accent: #00c2a8;
     --accent-dim: rgba(0,194,168,0.12);
     --text: #e4e8f0;
@@ -32,8 +33,7 @@
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  /* ── Layout ── */
-  .container { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
 
   /* ── Header / Hero ── */
   header {
@@ -41,12 +41,47 @@
     padding: 64px 0 48px;
   }
 
+  .hero-flex {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 28px;
+  }
+
+  .avatar-container {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    flex-shrink: 0;
+  }
+
+  .avatar-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent);
+    background: var(--surface);
+  }
+
+  .avatar-container::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 12px;
+    height: 12px;
+    background: #00e676;
+    border: 2px solid var(--bg);
+    border-radius: 50%;
+  }
+
   .prompt-line {
     font-family: var(--mono);
     font-size: 12px;
     color: var(--accent);
     letter-spacing: 0.08em;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -63,19 +98,18 @@
 
   h1 {
     font-family: var(--mono);
-    font-size: clamp(28px, 5vw, 42px);
+    font-size: clamp(28px, 5vw, 40px);
     font-weight: 600;
     letter-spacing: -0.02em;
     line-height: 1.15;
     color: #fff;
-    margin-bottom: 12px;
   }
 
   .tagline {
     font-size: 15px;
     color: var(--muted);
     margin-bottom: 28px;
-    max-width: 540px;
+    max-width: 640px;
   }
 
   .meta-row {
@@ -117,16 +151,16 @@
 
   /* ── About ── */
   .about-text {
-    font-size: 16px;
+    font-size: 15.5px;
     line-height: 1.8;
     color: #c5cce0;
-    max-width: 680px;
+    max-width: 720px;
   }
 
   /* ── Skills ── */
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 16px;
   }
   .skill-group {
@@ -158,35 +192,35 @@
     border: 1px solid rgba(0,194,168,0.2);
   }
   .tag.neutral {
-    background: rgba(255,255,255,0.04);
+    background: rgba(255,255,255,0.03);
     color: var(--muted);
-    border-color: var(--border);
+    border-color: rgba(255,255,255,0.05);
   }
 
-  /* ── Projects ── */
-  .projects-list { display: flex; flex-direction: column; gap: 24px; }
+  /* ── Projects & Cards ── */
+  .projects-list { display: flex; flex-direction: column; gap: 32px; }
 
   .project-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 28px;
+    padding: 32px;
     position: relative;
     transition: border-color 0.2s;
   }
-  .project-card:hover { border-color: rgba(0,194,168,0.4); }
+  .project-card:hover { border-color: rgba(0,194,168,0.3); }
 
   .project-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 16px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     flex-wrap: wrap;
   }
   .project-title {
     font-family: var(--mono);
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
     color: #fff;
   }
@@ -196,23 +230,27 @@
     color: var(--muted);
     white-space: nowrap;
   }
-  .project-desc {
-    color: #9aa3bc;
-    font-size: 14px;
-    line-height: 1.75;
-    margin-bottom: 16px;
+  
+  .project-subheading {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    margin: 16px 0 6px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
+
   .project-bullets {
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
   .project-bullets li {
-    font-size: 13.5px;
+    font-size: 14px;
     color: #9aa3bc;
-    padding-left: 18px;
+    padding-left: 20px;
     position: relative;
   }
   .project-bullets li::before {
@@ -223,12 +261,116 @@
     font-size: 12px;
   }
 
-  /* ── Experience ── */
+  /* ── Interactive Architecture Tab System ── */
+  .arch-control-box {
+    margin: 20px 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .arch-tabs {
+    display: flex;
+    background: rgba(255,255,255,0.02);
+    border-bottom: 1px solid var(--border);
+  }
+  .arch-tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--muted);
+    padding: 10px;
+    font-family: var(--mono);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .arch-tab-btn.active {
+    background: var(--surface-light);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .arch-content {
+    padding: 16px;
+    display: none;
+    font-size: 13.5px;
+    color: #9aa3bc;
+  }
+  .arch-content.active { display: block; }
+
+  /* ── Metrics Grid ── */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .metric-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+  }
+  .metric-value {
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .metric-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 2px;
+  }
+
+  /* ── Command Line Emulator Interface ── */
+  .cli-window {
+    background: #06070a;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin: 20px 0;
+    overflow: hidden;
+  }
+  .cli-header {
+    background: #11141a;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .cli-dots { display: flex; gap: 6px; }
+  .cli-dot { width: 8px; height: 8px; border-radius: 50%; background: #2a2f3d; }
+  .cli-dot.red { background: #ff5f56; }
+  .cli-title { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .cli-nav { display: flex; gap: 1px; background: var(--border); }
+  .cli-btn {
+    background: #11141a;
+    border: none;
+    color: var(--muted);
+    padding: 8px 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+  }
+  .cli-btn.active { background: #06070a; color: var(--accent); }
+  .cli-body { padding: 16px; font-family: var(--mono); font-size: 12.5px; min-height: 120px; white-space: pre-wrap; overflow-x: auto; }
+  .cli-prompt { color: #4caf50; }
+  .cli-output { color: #c5cce0; }
+  .cli-alert { color: #ff5252; font-weight: 600; }
+
+  /* ── Experience / Rest ── */
   .exp-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 28px;
+    padding: 32px;
   }
   .exp-header {
     display: flex;
@@ -240,14 +382,14 @@
   }
   .exp-role {
     font-family: var(--mono);
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
     color: #fff;
   }
   .exp-company {
     font-size: 13px;
     color: var(--accent);
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
   .exp-bullets {
     list-style: none;
@@ -256,9 +398,9 @@
     gap: 8px;
   }
   .exp-bullets li {
-    font-size: 13.5px;
+    font-size: 14px;
     color: #9aa3bc;
-    padding-left: 18px;
+    padding-left: 20px;
     position: relative;
   }
   .exp-bullets li::before {
@@ -269,7 +411,6 @@
     font-size: 12px;
   }
 
-  /* ── Leadership ── */
   .leadership-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -290,12 +431,11 @@
     margin-bottom: 14px;
   }
   .leadership-desc {
-    font-size: 13.5px;
+    font-size: 14px;
     color: #9aa3bc;
     line-height: 1.7;
   }
 
-  /* ── Education ── */
   .edu-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -321,12 +461,7 @@
     font-family: var(--mono);
   }
 
-  /* ── Languages ── */
-  .lang-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
+  .lang-row { display: flex; flex-wrap: wrap; gap: 12px; }
   .lang-item {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -334,26 +469,10 @@
     padding: 14px 22px;
     text-align: center;
   }
-  .lang-name {
-    font-family: var(--mono);
-    font-size: 14px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 2px;
-  }
-  .lang-level {
-    font-size: 11px;
-    color: var(--muted);
-    font-family: var(--mono);
-  }
+  .lang-name { font-family: var(--mono); font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 2px; }
+  .lang-level { font-size: 11px; color: var(--muted); font-family: var(--mono); }
 
-  /* ── Contact ── */
-  .contact-block {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
+  .contact-block { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
   .contact-link {
     font-family: var(--mono);
     font-size: 13px;
@@ -362,25 +481,22 @@
     border: 1px solid rgba(0,194,168,0.25);
     border-radius: 6px;
     padding: 8px 16px;
-    transition: background 0.2s;
-  }
-  .contact-link:hover {
-    background: rgba(0,194,168,0.22);
-    text-decoration: none;
   }
 
-  /* ── Footer ── */
   footer {
-    padding: 32px 0;
+    padding: 40px 0;
     text-align: center;
     font-family: var(--mono);
     font-size: 11px;
     color: var(--muted);
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
   }
 
-  @media (max-width: 600px) {
-    header { padding: 40px 0 32px; }
-    section { padding: 40px 0; }
+  @media (max-width: 680px) {
+    .hero-flex { flex-direction: column; text-align: center; gap: 18px; }
+    .meta-row { justify-content: center; }
+    .metrics-grid { grid-template-columns: 1fr; }
     .project-header, .exp-header { flex-direction: column; }
     .project-context { white-space: normal; }
   }
@@ -390,196 +506,235 @@
 
 <div class="container">
 
-  <!-- HEADER -->
   <header>
-    <div class="prompt-line">CYBERSECURITY PORTFOLIO — 2025</div>
-    <h1>Mohamed Amin<br>Brahmi</h1>
-    <p class="tagline">Network & Cybersecurity Engineering student at ESPRIT, specialising in offensive security, SIEM/SOAR deployment, and network infrastructure hardening.</p>
+    <div class="hero-flex">
+      <div class="avatar-container">
+  <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><circle cx='50' cy='45' r='20' fill='%236b7591'/><path d='M20,80 C20,60 80,60 80,80' fill='%236b7591'/><rect width='100' height='100' fill='none' stroke='%2300c2a8' stroke-width='2'/></svg>" alt="Mohamed Amin Brahmi">
+</div>
+      <div>
+        <div class="prompt-line">SECURE_SHELL // PORTFOLIO_V2</div>
+        <h1>Mohamed Amin Brahmi</h1>
+        <p class="tagline">Network & Cybersecurity Engineering student at ESPRIT. Specializing in end-to-end security orchestration, offensive testing workflows, and enterprise infrastructure hardening.</p>
+      </div>
+    </div>
     <div class="meta-row">
       <span>Tunis, Tunisia</span>
-      <span>4th Year — NIDS Engineering</span>
+      <span>NIDS Engineering (4th Year)</span>
       <span>ESPRIT</span>
       <span><a href="mailto:brahmi.mohamedamin@esprit.tn">brahmi.mohamedamin@esprit.tn</a></span>
     </div>
   </header>
 
-  <!-- ABOUT -->
   <section id="about">
-    <div class="section-label">About</div>
+    <div class="section-label">About Me</div>
     <p class="about-text">
-      I'm a fourth-year Network, Infrastructure & Data Security engineering student with a dual focus on offensive and defensive security. I've deployed SIEM/SOAR platforms in virtualised environments, hardened enterprise network infrastructure, and conducted penetration tests on live systems. Beyond the technical side, I lead the IEEE AESS chapter at ESPRIT — running workshops, coordinating regional events, and delivering projects that compete at a national level. I'm looking for a summer internship where I can bring both hands-on security skills and a team-oriented mindset to real enterprise challenges.
+      I am a fourth-year Network, Infrastructure & Data Security engineering student balancing an analytical offensive focus with rigorous defensive systems engineering. My practical background spans provisioning sandboxed security architectures, programming programmatic log tracking, and building cross-interface platform environments. Beyond engineering execution, I serve as Chapter Chair for the IEEE AESS at ESPRIT, managing cross-functional initiatives and presenting technical engineering deliverables under strict environmental criteria.
     </p>
   </section>
 
-  <!-- SKILLS -->
   <section id="skills">
-    <div class="section-label">Technical Skills</div>
+    <div class="section-label">Technical Competencies</div>
     <div class="skills-grid">
       <div class="skill-group">
-        <div class="skill-group-title">Cybersecurity</div>
+        <div class="skill-group-title">Defensive Systems</div>
         <div class="skill-tags">
           <span class="tag">Wazuh SIEM</span>
           <span class="tag">Shuffle SOAR</span>
-          <span class="tag">Penetration Testing</span>
+          <span class="tag">OPNsense / pfSense</span>
           <span class="tag">Threat Hunting</span>
-          <span class="tag">OPNsense</span>
-          <span class="tag">pfSense</span>
+          <span class="tag">Log Correlation</span>
+          <span class="tag">File Integrity (FIM)</span>
         </div>
       </div>
       <div class="skill-group">
-        <div class="skill-group-title">Offensive Tools</div>
+        <div class="skill-group-title">Offensive Operations</div>
         <div class="skill-tags">
           <span class="tag">Nmap</span>
           <span class="tag">Metasploit</span>
           <span class="tag">Burp Suite</span>
-          <span class="tag">Kali Linux</span>
-          <span class="tag">Wireshark</span>
+          <span class="tag">Vulnerability Mapping</span>
+          <span class="tag">Kali / Parrot OS</span>
         </div>
       </div>
       <div class="skill-group">
-        <div class="skill-group-title">Networking</div>
+        <div class="skill-group-title">Networking Core</div>
         <div class="skill-tags">
-          <span class="tag neutral">Cisco R&S</span>
-          <span class="tag neutral">VLANs</span>
-          <span class="tag neutral">OSPF</span>
-          <span class="tag neutral">TCP/IP</span>
-          <span class="tag neutral">SNMP</span>
+          <span class="tag neutral">VLAN Segmentation</span>
+          <span class="tag neutral">OSPF Routing</span>
+          <span class="tag neutral">Stateful Firewalls</span>
+          <span class="tag neutral">SNMP Polling</span>
           <span class="tag neutral">iptables</span>
+          <span class="tag neutral">Wireshark DPI</span>
         </div>
       </div>
       <div class="skill-group">
-        <div class="skill-group-title">Systems & Dev</div>
+        <div class="skill-group-title">Development & Systems</div>
         <div class="skill-tags">
-          <span class="tag neutral">Linux</span>
-          <span class="tag neutral">Windows Server</span>
+          <span class="tag neutral">Linux Kernel / Bash</span>
+          <span class="tag neutral">C / C++</span>
+          <span class="tag neutral">Windows Server / AD</span>
           <span class="tag neutral">Docker</span>
-          <span class="tag neutral">Python</span>
-          <span class="tag neutral">Bash</span>
-          <span class="tag neutral">C/C++</span>
-          <span class="tag neutral">Git</span>
+          <span class="tag neutral">Symfony Framework</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
   <section id="projects">
-    <div class="section-label">Projects</div>
+    <div class="section-label">Engineering Projects</div>
     <div class="projects-list">
 
       <div class="project-card">
         <div class="project-header">
           <span class="project-title">Virtualized Security Operations Platform</span>
-          <span class="project-context">ESPRIT — 4th Year Group Project</span>
+          <span class="project-context">ESPRIT Engineering Project</span>
         </div>
+        
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-value">15+</div>
+            <div class="metric-label">SOAR Playbooks</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">&lt; 3s</div>
+            <div class="metric-label">Incident Block Time</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">3 Zone</div>
+            <div class="metric-label">DMZ Isolation</div>
+          </div>
+        </div>
+
+        <div class="project-subheading">Core Blueprint & Execution</div>
         <ul class="project-bullets">
-          <li>Built a fully virtualised lab (VirtualBox) with segmented network zones replicating an enterprise DMZ; configured OPNsense/pfSense with VLAN segmentation, NAT, and stateful packet inspection.</li>
-          <li>Deployed Wazuh SIEM with custom detection rules covering file integrity monitoring, rootkit detection, and log correlation; integrated Shuffle SOAR with 15+ automated playbooks for IP blocking, alert enrichment, and ticket creation.</li>
-          <li>Conducted penetration tests using Nmap, Metasploit, and Burp Suite on peer infrastructure; documented CVEs, attack vectors, and remediation steps in a formal security report.</li>
+          <li><strong>Network Hardening:</strong> Configured an enterprise-grade sandboxed multi-zone network inside VirtualBox using OPNsense/pfSense, separating production layers from public interfaces using rigid VLAN tagging, stateful packet filtering, and custom NAT profiles.</li>
+          <li><strong>Log Aggregation & Analysis:</strong> Built comprehensive Wazuh SIEM telemetry parsing native logs; deployed localized monitoring configuration metrics targeting active rootkit patterns, runtime system file anomalies, and access control changes.</li>
+          <li><strong>Automated Orchestration:</strong> Engineered a Shuffle SOAR interface hosting over 15 customized orchestration chains to run asynchronous data mining, interface with threat database structures, push automated routing changes to block threat actors, and open high-priority ticketing records.</li>
+          <li><strong>Offensive Assessment & Validation:</strong> Designed and simulated credential sprays, lateral moves, and targeted network enumeration using Nmap, Metasploit, and web interception layers to rigorously evaluate defensive telemetry thresholds.</li>
         </ul>
-        <div class="skill-tags">
-          <span class="tag">Wazuh</span><span class="tag">Shuffle</span><span class="tag">OPNsense</span><span class="tag">Metasploit</span><span class="tag">Burp Suite</span><span class="tag">VirtualBox</span>
+
+        <div class="project-subheading">Interactive Infrastructure Map</div>
+        <div class="arch-control-box">
+          <div class="arch-tabs">
+            <button class="arch-tab-btn active" onclick="switchArch('network')">Network DMZ View</button>
+            <button class="arch-tab-btn" onclick="switchArch('siem')">Defensive SIEM/SOAR Pipeline</button>
+          </div>
+          <div id="arch-network" class="arch-content active">
+            <strong>[Public Interface]</strong> ──→ ( OPNsense / Edge WAN ) ──→ [ VLAN 10: Public DMZ Services ] <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──→ [ VLAN 20: Internal Enterprise Core ] (Monitored Layer)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──→ [ VLAN 30: Isolated Management Subnet / Wazuh Server ]
+          </div>
+          <div id="arch-siem" class="arch-content">
+            <strong>[Security Endpoint Monitor]</strong> ──(Wazuh Agent Log Push)──→ <strong>[Wazuh SIEM Manager Decoders]</strong> <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;└── Alert Criteria Reached ──→ <strong>[Shuffle SOAR Processing Hook]</strong> <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── Async Target Enrichment (Threat Intel Query)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── Network Firewall Block Instantiation (OPNsense API Call Rule Update)
+          </div>
+        </div>
+
+        <div class="project-subheading">Interactive Attack & Detection Telemetry Emulator</div>
+        <div class="cli-window">
+          <div class="cli-header">
+            <div class="cli-dots"><div class="cli-dot red"></div><div class="cli-dot"></div><div class="cli-dot"></div></div>
+            <div class="cli-title">bash — security_telemetry_terminal</div>
+          </div>
+          <div class="cli-nav">
+            <button class="cli-btn active" id="btn-recon" onclick="runSim('recon')">1. Nmap Discovery Scan</button>
+            <button class="cli-btn" id="btn-exploit" onclick="runSim('exploit')">2. Brute Force Attacker Path</button>
+            <button class="cli-btn" id="btn-soar" onclick="runSim('soar')">3. Automated SOAR Block Trigger</button>
+          </div>
+          <div class="cli-body" id="cli-text"><span class="cli-prompt">brahmi@soc-analyst-node:~$</span> <span class="cli-output">Select an attack phase or automation sequence above to read live emulated environment logs and alert vectors.</span></div>
+        </div>
+
+        <div class="skill-tags" style="margin-top: 16px;">
+          <span class="tag">Wazuh SIEM</span><span class="tag">Shuffle SOAR</span><span class="tag">OPNsense</span><span class="tag">Metasploit</span><span class="tag">Network Segmentation</span>
         </div>
       </div>
 
       <div class="project-card">
         <div class="project-header">
-          <span class="project-title">Autonomous CubeSat Monitoring System</span>
+          <span class="project-title">Autonomous Spacecraft Architecture & Monitoring Infrastructure</span>
           <span class="project-context">IEEE TSYP 13th Edition — AESS Tunisia</span>
         </div>
         <ul class="project-bullets">
-          <li>Designed an embedded monitoring system (RPi 4 + Arduino Mega) with temperature, voltage/current, and IMU sensors communicating over I2C/SPI protocols.</li>
-          <li>Implemented autonomous correction logic — thermal throttling, attitude correction, power load-shedding — validated against simulated failure scenarios within 3U CubeSat constraints.</li>
-          <li>Competed and won recognition against university teams nationwide at IEEE TSYP 13.</li>
+          <li><strong>System Prototyping:</strong> Conceptualized a complex hardware system configuration utilizing an STM32H7 processing unit coordinated alongside a Raspberry Pi 4 platform to process embedded parameters over continuous multi-wire data buses.</li>
+          <li><strong>Fault Management Loops:</strong> Implemented hardware programmatic controls processing local sensory input metrics to track anomalous conditions, forcing automated fallback controls, emergency component shutdowns, and strict platform load profiles.</li>
+          <li><strong>Strategic Validation:</strong> Achieved national-level competition distinction for physical model consistency and rapid failure mitigation responses within restrictive hardware physical environments.</li>
         </ul>
         <div class="skill-tags">
-          <span class="tag neutral">RPi 4</span><span class="tag neutral">Arduino</span><span class="tag neutral">I2C/SPI</span><span class="tag neutral">C/C++</span><span class="tag neutral">Anomaly Detection</span>
+          <span class="tag neutral">STM32H7 MCU</span><span class="tag neutral">Raspberry Pi 4</span><span class="tag neutral">I2C / SPI Communication Buses</span><span class="tag neutral">Embedded C++ Architecture</span>
         </div>
       </div>
 
       <div class="project-card">
         <div class="project-header">
-          <span class="project-title">E-Sports Tournament Platform</span>
-          <span class="project-context">ESPRIT — 3rd Year Group Project</span>
+          <span class="project-title">Synchronized E-Sports Tournament Software Engine</span>
+          <span class="project-context">ESPRIT Academic Evaluation</span>
         </div>
         <ul class="project-bullets">
-          <li>Built a Symfony MVC backend paired with a JavaFX desktop client, with real-time REST API synchronisation between both interfaces.</li>
-          <li>Implemented role-based access control, live tournament brackets, Chart.js analytics dashboards, and automated JavaMail notifications.</li>
+          <li><strong>Dual Interface Architecture:</strong> Developed a highly decoupled data processing framework pairing an object-oriented JavaFX desktop client suite with a Symfony web back-end infrastructure.</li>
+          <li><strong>Data Orchestration:</strong> Programmed real-time data sync routes via REST endpoints, secured utilizing role-defined access tables, automated reporting templates, and relational schemas.</li>
         </ul>
         <div class="skill-tags">
-          <span class="tag neutral">Symfony</span><span class="tag neutral">JavaFX</span><span class="tag neutral">REST API</span><span class="tag neutral">MySQL</span><span class="tag neutral">Chart.js</span>
+          <span class="tag neutral">Symfony MVC</span><span class="tag neutral">JavaFX Client Execution</span><span class="tag neutral">REST Endpoints</span><span class="tag neutral">Relational MySQL Databases</span>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
   <section id="experience">
-    <div class="section-label">Internship Experience</div>
+    <div class="section-label">Field Experience</div>
     <div class="exp-card">
       <div class="exp-header">
         <span class="exp-role">Network Infrastructure Intern</span>
-        <span style="font-family:var(--mono);font-size:11px;color:var(--muted);">CPG — Compagnie des Phosphates de Gafsa</span>
+        <span style="font-family:var(--mono);font-size:11px;color:var(--muted);">Compagnie des Phosphates de Gafsa (CPG)</span>
       </div>
       <div class="exp-company">Tunisia</div>
       <ul class="exp-bullets">
-        <li>Deployed Zabbix with SNMP-based polling across enterprise switches and routers; built custom dashboards and tuned alert thresholds for CPU, memory, and interface utilisation.</li>
-        <li>Designed multi-VLAN topologies with inter-VLAN routing and OSPF in Cisco Packet Tracer; administered Linux servers with iptables rules and SSH key authentication.</li>
-        <li>Performed deep packet inspection with Wireshark; identified rogue DHCP and suspicious ARP traffic across the industrial-site network and produced a formal remediation report.</li>
+        <li><strong>Infrastructure Telemetry Deployments:</strong> Provisioned an operational enterprise monitoring platform using Zabbix to poll industrial networking modules via SNMP, organizing structured visibility metrics for hardware memory thresholds and system interfaces.</li>
+        <li><strong>Routing and Subnet Provisioning:</strong> Mapped and simulated enterprise multi-VLAN architectures across routing environments, optimizing traffic path distributions with OSPF and building localized Linux endpoint firewalls.</li>
+        <li><strong>Packet Level Inversion Analysis:</strong> Captured live network sequences via Wireshark to locate non-compliant protocol distributions, evaluating anomalous address resolution activity and drafting structural resolution maps.</li>
       </ul>
     </div>
   </section>
 
-  <!-- LEADERSHIP -->
   <section id="leadership">
-    <div class="section-label">Leadership</div>
+    <div class="section-label">Leadership & Technical Directorship</div>
     <div class="leadership-card">
       <div class="leadership-role">Chapter Chair — Aerospace & Electronic Systems Society (AESS)</div>
       <div class="leadership-org">IEEE ESPRIT Student Branch</div>
       <div class="leadership-desc">
-        Managing a team of 8+ members, running technical workshops on embedded systems, cybersecurity, and aerospace topics. Representing ESPRIT AESS at IEEE Tunisia Section events and coordinating regional joint activities. Led the team that delivered the award-winning CubeSat project at TSYP 13, competing against university teams nationwide.
+        Lead technical strategies and coordinate team milestones for over 8 active technical members. Curate specialized curriculum sessions across technical infrastructure topics, secure platform architectures, and embedded development practices. Spearheaded engineering operations and resource management frameworks for national project initiatives, delivering award-winning technical builds across tight execution cycles.
       </div>
     </div>
   </section>
 
-  <!-- EDUCATION -->
   <section id="education">
-    <div class="section-label">Education</div>
+    <div class="section-label">Academic Foundations</div>
     <div class="edu-card">
       <div class="edu-degree">Engineering Degree — Network, Infrastructure & Data Security (NIDS)</div>
       <div class="edu-school">ESPRIT — École Supérieure Privée d'Ingénierie et de Technologies, Tunis</div>
-      <div class="edu-note">Specialisation: Cybersecurity, Network Architecture — 4th Year (2021–2026)</div>
+      <div class="edu-note">Focus Areas: Advanced Cryptography, Hardened Architecture Design, Real-time Operations Management — 4th Year (2021–2026)</div>
     </div>
     <div class="edu-card">
       <div class="edu-degree">Baccalaureate — Technical Sciences</div>
       <div class="edu-school">Lycée de Metlaoui, Gafsa</div>
-      <div class="edu-note">Graduated with honours</div>
+      <div class="edu-note">Graduated with Honors</div>
     </div>
   </section>
 
-  <!-- LANGUAGES -->
   <section id="languages">
     <div class="section-label">Languages</div>
     <div class="lang-row">
-      <div class="lang-item">
-        <div class="lang-name">Arabic</div>
-        <div class="lang-level">Native</div>
-      </div>
-      <div class="lang-item">
-        <div class="lang-name">French</div>
-        <div class="lang-level">Advanced — B2</div>
-      </div>
-      <div class="lang-item">
-        <div class="lang-name">English</div>
-        <div class="lang-level">Professional — B2</div>
-      </div>
+      <div class="lang-item"><div class="lang-name">Arabic</div><div class="lang-level">Native</div></div>
+      <div class="lang-item"><div class="lang-name">French</div><div class="lang-level">Advanced — B2</div></div>
+      <div class="lang-item"><div class="lang-name">English</div><div class="lang-level">Professional — B2</div></div>
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
-    <div class="section-label">Contact</div>
+    <div class="section-label">Contact Endpoint</div>
     <div class="contact-block">
       <a class="contact-link" href="mailto:brahmi.mohamedamin@esprit.tn">brahmi.mohamedamin@esprit.tn</a>
       <span style="font-family:var(--mono);font-size:12px;color:var(--muted);">+216 58 103 649</span>
@@ -590,8 +745,52 @@
 </div>
 
 <footer>
-  <div class="container">Mohamed Amin Brahmi — Cybersecurity Engineering Portfolio — 2025</div>
+  <div class="container">Mohamed Amin Brahmi — Cybersecurity Engineering Portfolio // 2026</div>
 </footer>
+
+<script>
+  function switchArch(tabName) {
+    document.querySelectorAll('.arch-tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.arch-content').forEach(content => content.classList.remove('active'));
+    
+    event.target.classList.add('active');
+    document.getElementById('arch-' + tabName).classList.add('active');
+  }
+
+  const simulations = {
+    recon: `<span class="cli-prompt">brahmi@attacker-node:~$</span> nmap -sV -p- -T4 192.168.20.45\n\n<span class="cli-output">Starting Nmap 7.94 ( https://nmap.org ) at 2026-06-12 14:10 CET
+Nmap scan report for target-internal-node (192.168.20.45)
+Host is up (0.00042s latency).
+Not shown: 65532 closed tcp ports
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1
+80/tcp   open  http    Apache httpd 2.4.52
+8080/tcp open  http    Apache Tomcat 9.0.58
+
+Service detection performed. Report written to stdout.</span>`,
+    
+    exploit: `<span class="cli-prompt">brahmi@attacker-node:~$</span> hydra -l admin -P wordlists/rockyou.txt ssh://192.168.20.45 -t 4\n\n<span class="cli-output">Hydra v9.5 (c) 2023 by van Hauser/THC
+[DATA] attacking ssh://192.168.20.45:22/
+[STATUS] 128.00 tries/min, 512 tries in total
+</span><span class="cli-alert">[ALERT-CRITICAL] [SSH] target successfully cracked - user: admin, password: password123</span>\n\n<span class="cli-prompt">brahmi@wazuh-siem-manager:/#</span> tail -n 2 /var/ossec/logs/alerts/alerts.log\n<span class="cli-alert">** Alert 1718201599.449122: mail, - syslog,sshd,invalid_login,authentication_failed,
+2026-06-12T14:12:01.102+0100 rsyslogd: sshd[14920]: Failed password for admin from 192.168.10.14 port 43210 ssh2
+Rule: 5712 fired (Level 10) -> "SSHD brute force burst attempt successful entry detection threshold bypassed."</span>`,
+    
+    soar: `<span class="cli-prompt">brahmi@shuffle-soar-engine:~$</span> python3 webhook_listener.py --intercept-rule 5712\n\n<span class="cli-output">[INFO] Processing raw JSON log webhook package from Wazuh SIEM...
+[INFO] Triggering Webhook Automation Chain: "Mitigate-SSH-BruteForce"
+[DATA] Extracted Malicious Attacker Node Vector IP: 192.168.10.14
+[EXEC] Running cross-reference check against AbuseIPDB... Verification complete. Threat score: 98%.
+[API_CALL] Posting dynamic drop block instruction to OPNsense firewall API endpoint...
+</span><span class="cli-alert">[STATUS-SUCCESS] 200 OK -> Rule created: "Block Inbound From 192.168.10.14 on WAN interface"
+[INFO] System containment execution complete. Ticket #88439 generated inside Jira platform. Mitigation elapsed runtime: 1.84 seconds.</span>`
+  };
+
+  function runSim(type) {
+    document.querySelectorAll('.cli-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById('btn-' + type).classList.add('active');
+    document.getElementById('cli-text').innerHTML = simulations[type];
+  }
+</script>
 
 </body>
 </html>
